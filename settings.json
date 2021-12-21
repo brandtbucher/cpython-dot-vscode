@@ -2,6 +2,6 @@
     "C_Cpp.default.includePath": [
         ".",
         "Include",
-        "Include/internal"
+        "Include/internal",
     ],
 }
