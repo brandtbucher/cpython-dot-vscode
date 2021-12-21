@@ -5,54 +5,54 @@
             "label": "configure-enable-optimizations",
             "type": "shell",
             "command": "./configure --quiet --config-cache --enable-optimizations --with-lto",
-            "problemMatcher": []
+            "problemMatcher": [],
         },
         {
             "label": "configure-with-pydebug",
             "type": "shell",
             "command": "./configure --quiet --config-cache --with-pydebug",
-            "problemMatcher": []
+            "problemMatcher": [],
         },
         {
             "label": "make-all",
             "type": "shell",
             "command": "make all --quiet --jobs",
             "dependsOn": [
-                "make-regen-all"
+                "make-regen-all",
             ],
             "problemMatcher": [
-                "$gcc"
-            ]
+                "$gcc",
+            ],
         },
         {
             "label": "make-clean",
             "type": "shell",
             "command": "make clean --quiet --jobs",
             "problemMatcher": [
-                "$gcc"
-            ]
+                "$gcc",
+            ],
         },
         {
             "label": "make-regen-all",
             "type": "shell",
             "command": "make regen-all --quiet --jobs",
             "dependsOn": [
-                "make-clean"
+                "make-clean",
             ],
             "problemMatcher": [
-                "$gcc"
-            ]
+                "$gcc",
+            ],
         },
         {
             "label": "make-test",
             "type": "shell",
             "command": "make test --quiet --jobs",
             "dependsOn": [
-                "make-all"
+                "make-all",
             ],
             "problemMatcher": [
-                "$gcc"
-            ]
+                "$gcc",
+            ],
         },
     ]
 }
