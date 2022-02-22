@@ -8,6 +8,12 @@
             "problemMatcher": [],
         },
         {
+            "label": "configure-enable-pystats",
+            "type": "shell",
+            "command": "./configure --quiet --config-cache --enable-pystats --with-pydebug",
+            "problemMatcher": []
+        },
+        {
             "label": "configure-with-pydebug",
             "type": "shell",
             "command": "./configure --quiet --config-cache --with-pydebug",
