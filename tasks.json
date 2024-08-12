@@ -2,33 +2,65 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "configure-enable-optimizations",
+            "label": "activate",
             "type": "shell",
-            "command": "./configure --quiet --config-cache --enable-optimizations --with-lto",
+            "command": "eval \"$(pyenv init -)\"; pyenv shell 3.12-dev",
+            "dependsOn": [],
             "problemMatcher": [],
         },
         {
-            "label": "configure-enable-pystats",
+            "label": "configure",
             "type": "shell",
-            "command": "./configure --quiet --config-cache --enable-pystats --with-pydebug",
+            "command": "PYTHON_FOR_REGEN=python3.12 ./configure --quiet --config-cache",
+            "dependsOn": [
+                "activate",
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "label": "configure-debug",
+            "type": "shell",
+            "command": "PYTHON_FOR_REGEN=python3.12 ./configure --quiet --config-cache --with-pydebug",
+            "dependsOn": [
+                "activate",
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "label": "configure-release",
+            "type": "shell",
+            "command": "PYTHON_FOR_REGEN=python3.12 ./configure --quiet --config-cache --enable-optimizations --with-lto",
+            "dependsOn": [
+                "activate",
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "label": "configure-jit",
+            "type": "shell",
+            "command": "PYTHON_FOR_REGEN=python3.12 ./configure --quiet --config-cache --enable-experimental-jit",
+            "dependsOn": [
+                "activate",
+            ],
             "problemMatcher": []
         },
         {
-            "label": "configure-with-pydebug",
+            "label": "configure-jit-debug",
             "type": "shell",
-            "command": "./configure --quiet --config-cache --with-pydebug",
-            "problemMatcher": [],
+            "command": "PYTHON_FOR_REGEN=python3.12 ./configure --quiet --config-cache --enable-experimental-jit --with-pydebug",
+            "dependsOn": [
+                "activate",
+            ],
+            "problemMatcher": []
         },
         {
-            "label": "make-all",
+            "label": "configure-jit-release",
             "type": "shell",
-            "command": "make all --quiet --jobs",
+            "command": "PYTHON_FOR_REGEN=python3.12 ./configure --quiet --config-cache --enable-experimental-jit --enable-optimizations --with-lto",
             "dependsOn": [
-                "make-regen-all",
+                "activate",
             ],
-            "problemMatcher": [
-                "$gcc",
-            ],
+            "problemMatcher": []
         },
         {
             "label": "make-clean",
@@ -41,10 +73,15 @@
         {
             "label": "make-regen-all",
             "type": "shell",
-            "command": "make regen-all --quiet --jobs",
-            "dependsOn": [
-                "make-clean",
+            "command": "make regen-all --quiet",  // --jobs
+            "problemMatcher": [
+                "$gcc",
             ],
+        },
+        {
+            "label": "make-all",
+            "type": "shell",
+            "command": "make all --quiet --jobs",
             "problemMatcher": [
                 "$gcc",
             ],
@@ -53,9 +90,6 @@
             "label": "make-test",
             "type": "shell",
             "command": "make test --quiet --jobs",
-            "dependsOn": [
-                "make-all",
-            ],
             "problemMatcher": [
                 "$gcc",
             ],
