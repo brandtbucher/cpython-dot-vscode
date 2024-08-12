@@ -1,7 +1,10 @@
 {
+    "C_Cpp.default.defines": [
+        "Py_BUILD_CORE",
+    ],
     "C_Cpp.default.includePath": [
         ".",
-        "Include",
-        "Include/internal",
+        "./Include",
+        "./Include/internal",
     ],
 }
